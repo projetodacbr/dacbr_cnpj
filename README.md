@@ -1,4 +1,4 @@
-Package para consulta das informações do CNPJ (https://receitaws.com.br/).
+Package para consulta das informações do CNPJ utilizando provedor Receita WS (https://receitaws.com.br/).
 
 ![ReceitaWS](example/receita_ws.png)
 
@@ -7,11 +7,11 @@ Package para consulta das informações do CNPJ (https://receitaws.com.br/).
 Um simples exemplo de uso:
 
 ```dart
-import 'receitaws.dart' as ws;
+import 'dacbr_cnpj.dart' as dcnpj;
 import 'dart:io';
 
 main() async {
-  var cnpj = new ws.receitaws();
+  var cnpj = new dcnpj.dacbr_cnpj();
 
   print('Digite o CNPJ: ');
 
@@ -73,8 +73,6 @@ main() async {
 
 ## Recursos
 
-ReadIP - Método que realiza a consulta da localização do IP Externo.
-
 gets
 
     getBody(); // Retorna na integralidade a resposta da API.
@@ -111,4 +109,4 @@ gets
 
 Por favor para requisições de funcionalidades e bugs [issue tracker][tracker].
 
-[tracker]: https://github.com/mateuspenha/dacbr_cnpj/issues
+[tracker]: https://github.com/projetodacbr/dacbr_cnpj/issues
