@@ -1,4 +1,6 @@
-Package para consulta das informações do CNPJ utilizando provedor Receita WS (https://receitaws.com.br/).
+Package integrante da suite DACBr, para consulta online de CNPJ.
+
+Integração com API Receita WS (https://www.receitaws.com.br). Se você estava procurando um webservice gratuito e de alto desempenho para consultar CNPJ? Utilize o serviço, melhore a qualidade de suas aplicações e colabore para manter esta base de dados atualizada.
 
 ![ReceitaWS](example/receita_ws.png)
 
