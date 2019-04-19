@@ -106,6 +106,8 @@ gets
     getNaturezaJuridica(); // Recupera a Natureza Juridica da Empresa.
     getSituacaoEspecial(); // Recupera a data da situação especial da Empresa.
     getUltimaAtualizacao(); // Recupera a data da última atualização do registro junto a SEFAZ.         
+
+Caso queira conhecer melhor o funcionamento da API acesse o site de origem da API (https://www.receitaws.com.br)
     
 ## Funcionalidades e Bugs
 
