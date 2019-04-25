@@ -1,62 +1,52 @@
-import 'package:dacbr_cnpj/dacbr_cnpj.dart' as doc;
+import 'package:dacbr_cnpj/dacbr_cnpj.dart';
 import 'dart:io';
 
 main() async {
-  var cnpj = new doc.dacbr_cnpj();
-
   print('Digite o CNPJ: ');
+  String cnpjDigitado = stdin.readLineSync();
 
-  String lido = stdin.readLineSync();
+  try {
+    final empresa = await DacbrCnpj.searchCNPJ(cnpjDigitado);
 
-  var result = await cnpj.searchCNPJ(lido, null);
+    print('CNPJ: ${empresa.cnpj}');
+    print('Tipo: ${empresa.tipo}');
+    print('Data de Abertura: ${empresa.abertura}');
+    print('Nome Empresarial: ${empresa.nome}');
+    print('Nome Fantasia: ${empresa.fantasia}');
+    print('Porte: ${empresa.porte}');
+    print('Atividade Principal: ${empresa.atividadePrincipal}');
+    print('CANE Prinripal: ${empresa.CNAEPrincipal}');
+    print('CANE Prinripal (Números): ${empresa.atividadePrincipalNumber}');
 
-  // Sucesso
-  if (cnpj.getResponse() == 200) {
-    print('CNPJ: '+cnpj.getCNPJ());
-    print('Tipo: '+cnpj.getTipo());
-    print('Data de Abertura: '+cnpj.getAbertura());
-    print('Nome Empresarial: '+cnpj.getNome());
-    print('Nome Fantasia: '+cnpj.getFantasia());
-    print('Porte: '+cnpj.getPorte());
-    print('Atividade Principal: '+cnpj.getAtividadePrincipal());
-    print('CANE Prinripal: '+cnpj.getCNAEPrincipal());
-    print('CANE Prinripal (Números): '+cnpj.getCNAEPrincipalNumeros().toString());
+    empresa.atividadesSecundarias.forEach((atividade) =>
+      print('Atividade Secundária: ${atividade.text}: CNAE ${atividade.code}')
+    );
 
-    Map<String, String> sec = new Map<String, String>();
+    print('Logradouro: ${empresa.logradouro}');
+    print('Número: ${empresa.numero}');
+    print('Complemento: ${empresa.complemento}');
+    print('CEP: ${empresa.cep}');
+    print('Bairro: ${empresa.bairro}');
+    print('Municipio: ${empresa.municipio}');
+    print('UF: ${empresa.uf}');
+    print('E-mail (Endereço Eletrônico): ${empresa.email}');
+    print('Telefone: ${empresa.telefone}');
+    print('Ente Federativo Responsável (EFR): ${empresa.efr}');
+    print('Situação: ${empresa.situacao}');
+    print('Data da Situação: ${empresa.data_situacao}');
+    print('Motivo da Situação: ${empresa.motivo_situacao}');
+    print('Natureza Juridica: ${empresa.natureza_juridica}');
+    print('Situação Especial: ${empresa.situacao_especial}');
+    print('Data da Situação Especial: ${empresa.data_situacao_especial}');
+    print('Ultima Atualização: ${empresa.ultima_atualizacao}');
+    print('Capital Social: ${empresa.capital_social}');
 
-    sec = cnpj.getAtividadesSecundarias();
+    empresa.qsa.forEach((qsa) =>
+      print('Sócio: ${qsa.nome}: Qualificação ${qsa.qual}')
+    );
 
-    sec.forEach((v1,v2) => print('Atividade Secundária: ${v1}: CNAE ${v2}'));
-
-    print('Logradouro: '+cnpj.getLogradouro());
-    print('Número: '+cnpj.getNumero());
-    print('Complemento: '+cnpj.getComplemento());
-    print('CEP: '+cnpj.getCEP());
-    print('Bairro: '+cnpj.getBairro());
-    print('Municipio: '+cnpj.getMunicipio());
-    print('UF: '+cnpj.getUF());
-    print('E-mail (Endereço Eletrônico): '+cnpj.getEmail());
-    print('Telefone: '+cnpj.getTelefone());
-    print('Ente Federativo Responsável (EFR): '+cnpj.getEFR());
-    print('Situação: '+cnpj.getSituacao());
-    print('Data da Situação: '+cnpj.getDataSituacao());
-    print('Motivo da Situação: '+cnpj.getMotivoSituacao());
-    print('Natureza Juridica: '+cnpj.getNaturezaJuridica());
-    print('Situação Especial: '+cnpj.getSituacaoEspecial());
-    print('Data da Situação Especial: '+cnpj.getDataSituacaoEspecial());
-
-    print('Ultima Atualização: '+cnpj.getUltimaAtualizacao());
-
-    print('Capital Social: '+cnpj.getCapitalSocial());
-
-    Map<String, String> qsa = new Map<String, String>();
-
-    qsa = cnpj.getQSA();
-
-    qsa.forEach((v1,v2) => print('Sócio: ${v1}: Qualificação ${v2}'));
-
-  } else {
-    print('Código de Retorno: '+cnpj.getResponse().toString());
-    print('Erro: '+cnpj.getBody());
+  } catch (error) {
+    print("Acontenceu um erro ao comunicar com a api");
+    print(error);
   }
 }
